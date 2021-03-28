@@ -1,0 +1,68 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+html,body {
+  fill:#1D1D1B;
+  font-family: 'Nunito Sans','Proxima Nova',sans-serif;
+}
+.jumbotron {
+  width: 90vw;
+  margin: auto;
+  margin-bottom: 5vh;
+  margin-top: 5vh;
+}
+/* h1.display-4 {
+  color: #1d1d1b;
+} */
+.playsBold{
+  font-weight: 700;
+}
+.trackRow text {
+  font-size: 21px;
+  letter-spacing: 1;
+  fill:#1D1D1B;
+  font-family: 'Nunito Sans','Proxima Nova',sans-serif;
+  font-weight: 700;
+}
+
+.trackRow text.indexText {
+  font-weight: 700;
+  fill: #FCEC82;
+  
+}
+.trackRow text.artistText {
+  font-weight: 500;
+}
+#table {
+  margin: auto;
+  width: 90vw;
+}
+.trackRow {
+  display: block;
+  margin:auto;
+}
+.trackTitleRow text{
+  font-size: 26px;
+  letter-spacing: 1;
+  fill:#1D1D1B;
+  font-family: 'Nunito Sans','Proxima Nova',sans-serif;
+  font-weight: 700;
+}

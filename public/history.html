@@ -2,29 +2,27 @@
 <html>
   <head>
     <title>Harry's Spotify History</title>
-    <link
-      rel="stylesheet"
-      href="//netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css" />
+
+    
   </head>
 
   <body style="background-color: #ffffff">
     <div class="container">
       <div class="jumbotron">
-        <h1 class="display-4" id="status-message">Total number of plays:</h1>
+        <h1 class="display-4" id="status-message">Total number of plays: <span class='playsBold'></span></h1>
       </div>
+      <!-- <object data="/img/harry.html" type="text/html"></object> -->
       <div>
-        <button class="btn btn-light-green mb-2" id="most-played">
-          Display 100 most played
-        </button>
-        <button class="btn btn-light-green mb-2" id="play-time">
-          Display listen time
-        </button>
+     <!-- <h3>this is my total listen time</h3> -->
+
       </div>
       <table class="table table-striped" id="table">
         <thead class="thead-green"></thead>
         <tbody id="table-body"></tbody>
+
       </table>
     </div>
 
@@ -42,33 +40,33 @@
 
           var currentText = $("#status-message").text();
 
-          $("#status-message").text(currentText + " " + data.playCount);
+          $(".playsBold").text(data.playCount);
         });
       });
 
-      $("#most-played").click(() => {
-        $.ajax({
-          url: "/most-played/?limit=100&offset=0",
-        }).done((data) => {
-          data.mostPlayed.map((element) => {
-            element.trackName = formatTrackName(element.trackName);
-            return element;
-          });
-          console.log(doLineNumbers(data.mostPlayed));
-          table = document.getElementById("table");
+      // $("#most-played").click(() => {
+      //   $.ajax({
+      //     url: "/most-played/?limit=100&offset=0",
+      //   }).done((data) => {
+      //     data.mostPlayed.map((element) => {
+      //       element.trackName = formatTrackName(element.trackName);
+      //       return element;
+      //     });
+      //     console.log(doLineNumbers(data.mostPlayed));
+      //     table = document.getElementById("table");
 
-          var headers = ["#", "trackName", "artistName", "timesPlayed"];
-          //table.innerHTML = harry2Table(table, data.mostPlayed, headers);
-          table.innerHTML = json2Table(data.mostPlayed);
-        });
-      });
+      //     var headers = ["#", "trackName", "artistName", "timesPlayed"];
+      //     //table.innerHTML = harry2Table(table, data.mostPlayed, headers);
+      //     table.innerHTML = json2Table(data.mostPlayed);
+      //   });
+      // });
 
-      $("#play-time").click(() => {
-        $.ajax({
+      $.ajax({
           url: "/play-time/?limit=100&offset=0",
         }).done((data) => {
           data.playTime.map((element) => {
             element.trackName = formatTrackName(element.trackName);
+            element.artistName = formatArtistName(element.artistName);
             return element;
           });
 
@@ -76,11 +74,12 @@
             let ms = obj.timeListened;
             obj.timeListened = FormatMS(ms);
           });
+        
 
           table = document.getElementById("table");
           table.innerHTML = json2Table(data.playTime);
         });
-      });
+
 
       // https://datatables.net/
       function harry2Table(table, headers, json) {
@@ -101,10 +100,12 @@
 
       function json2Table(json) {
         var cols = Object.keys(json[0]);
-
+        
         //Map over columns, make headers,join into string
-        let headerRow = cols.map((col) => `<th>${col}</th>`).join("");
-
+        // let headerRow = cols.map((col) => `<th>${cols[0]}</th>`).join("");
+        let headerRow = `<text transform='matrix(1 0 0 1 64.5754 28.234)'>${cols[0]}</text>
+        <text transform='matrix(1 0 0 1 478.9822 28.2335)'>${cols[1]}</text>
+        <text transform='matrix(1 0 0 1 865.5422 28.234)'>${cols[2]}</text>`;
         //map over array of json objs, for each row(obj) map over column values,
         //and return a td with the value of that object for its column
         //take that array of tds and join them
@@ -112,21 +113,26 @@
         //finally join all the rows together
         let rows = json
           .map((row, index) => {
-            let tds = cols.map((col) => `<td>${row[col]}</td>`).join("");
-            return `<tr>${tds}</tr>`;
+            let tds = cols.map((col) => `${row[col]}`).join("");
+            return `<svg version="1.1" class="trackRow" width="90vw" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1085.823 50" enable-background="new 0 0 1085.823 50" xml:space="preserve">
+<rect x="71.31" y="20.375" fill="#BCD5DA" width="1014.514" height="24.318"/>
+<rect x="61.31" y="10.375" fill="#D5F1F7" width="1014.514" height="24.318"/>
+<rect x="61.31" y="0.375" fill="#D5F1F7" width="1014.514" height="24.318"/>
+<rect y="10.375" fill="#333333" width="50.823" height="24.318"/>
+<rect y="0.375" fill="#333333" width="50.823" height="24.318"/>
+<text transform="matrix(1 0 0 1 6.2073 27.0312)" class="indexText">${index+1}</text>
+${tds}<line fill="none" stroke="#525252" stroke-width="0.75" stroke-miterlimit="10" x1="61.31" y1="0.375" x2="1075.823" y2="0.375"/>
+<line fill="none" stroke="#525252" stroke-miterlimit="10" x1="61.31" y1="34.693" x2="1075.823" y2="34.693"/>
+</svg>`;
           })
           .join("");
 
         //build the table
-        const table = `
-                <table>
-                    <thead>
-                        <tr>${headerRow}</tr>
-                    <thead>
-                    <tbody>
-                        ${rows}
-                    <tbody>
-                <table>`;
+        const table = `<svg version='1.1' class="trackTitleRow" width="90vw" xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px'
+	 viewBox='0 0 1085.823 46.322' enable-background='new 0 0 1085.823 46.322' xml:space='preserve'>
+<rect fill='#ffffff' width='1085.823' height='40.636'/>${headerRow}<line fill='none' stroke='#ffffff' stroke-miterlimit='10' x1='0' y1='45.822' x2='1085.823' y2='45.822'/>
+</svg>${rows}`;
 
         return table;
       }
@@ -135,7 +141,13 @@
         if (str.includes("-")) {
           str = str.substring(0, str.indexOf("-") - 1);
         }
-        return str;
+      
+        return "<text transform='matrix(1 0 0 1 64.5755 27.0317)'>" + str + "</text>";
+      
+      }
+
+      function formatArtistName(str) {
+        return "<text transform='matrix(1 0 0 1 478.9822  27.0317)' class='artistText'>" + str + "</text>";
       }
 
       function modifyMS(json) {
@@ -155,8 +167,11 @@
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        return hours + ":" + minutes + ":" + seconds;
+      
+        return "<text transform='matrix(1 0 0 1 865.5423 27.0317)'>" + hours + ":" + minutes + ":" + seconds + "</text>";
+      
       }
+      
     </script>
   </body>
 </html>
