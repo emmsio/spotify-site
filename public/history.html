@@ -114,16 +114,16 @@
         let rows = json
           .map((row, index) => {
             let tds = cols.map((col) => `${row[col]}`).join("");
-            return `<svg version="1.1" class="trackRow" width="90vw" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 1085.823 50" enable-background="new 0 0 1085.823 50" xml:space="preserve">
-<rect x="71.31" y="20.375" fill="#BCD5DA" width="1014.514" height="24.318"/>
-<rect x="61.31" y="10.375" fill="#D5F1F7" width="1014.514" height="24.318"/>
-<rect x="61.31" y="0.375" fill="#D5F1F7" width="1014.514" height="24.318"/>
-<rect y="10.375" fill="#333333" width="50.823" height="24.318"/>
-<rect y="0.375" fill="#333333" width="50.823" height="24.318"/>
-<text transform="matrix(1 0 0 1 6.2073 27.0312)" class="indexText">${index+1}</text>
+            return `<svg version="1.1" class="trackRow" width="90vw"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1085.823 70" enable-background="new 0 0 1085.823 70" xml:space="preserve">
+   <rect x="71.31" y="39.375" fill="#BCD5DA" width="1014.514" height="24.318"/>
+<rect x="61.31" y="29.375" fill="#D5F1F7" width="1014.514" height="24.318"/>
+<rect x="61.31" y="0.375" fill="#D5F1F7" width="1014.514" height="43.318"/>
+<rect y="29.375" fill="#333333" width="50.823" height="24.318"/>
+<rect y="0.375" fill="#333333" width="50.823" height="43.318"/>
+<text transform="matrix(1 0 0 1 6.2073 35.0312)" class="indexText">${index+1}</text>
 ${tds}<line fill="none" stroke="#525252" stroke-width="0.75" stroke-miterlimit="10" x1="61.31" y1="0.375" x2="1075.823" y2="0.375"/>
-<line fill="none" stroke="#525252" stroke-miterlimit="10" x1="61.31" y1="34.693" x2="1075.823" y2="34.693"/>
+<line fill="none" stroke="#525252" stroke-miterlimit="10" x1="61.31" y1="53.693" x2="1075.823" y2="53.693"/>
 </svg>`;
           })
           .join("");
@@ -142,12 +142,12 @@ ${tds}<line fill="none" stroke="#525252" stroke-width="0.75" stroke-miterlimit="
           str = str.substring(0, str.indexOf("-") - 1);
         }
       
-        return "<text transform='matrix(1 0 0 1 64.5755 27.0317)'>" + str + "</text>";
+        return "<text transform='matrix(1 0 0 1 64.5755 35.0317)' class='trackName'>" + str + "</text>";
       
       }
 
       function formatArtistName(str) {
-        return "<text transform='matrix(1 0 0 1 478.9822  27.0317)' class='artistText'>" + str + "</text>";
+        return "<rect id='overrect' x='465.456' y='2.831' fill='#D5F1F7' width='393.081' height='47.189'/><text transform='matrix(1 0 0 1 478.9822 35.0312)' class='artistText'>" + str + "</text>";
       }
 
       function modifyMS(json) {
@@ -168,7 +168,7 @@ ${tds}<line fill="none" stroke="#525252" stroke-width="0.75" stroke-miterlimit="
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
       
-        return "<text transform='matrix(1 0 0 1 865.5423 27.0317)'>" + hours + ":" + minutes + ":" + seconds + "</text>";
+        return "<rect id='overrect2' x='864.096' y='2.831' fill='#D5F1F7' width='205.041' height='47.189'/><text transform='matrix(1 0 0 1 865.5423 35.0317)'>" + hours + "h:" + minutes + "m:" + seconds + "s</text>";
       
       }
       

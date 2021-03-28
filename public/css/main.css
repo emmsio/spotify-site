@@ -36,7 +36,7 @@ html,body {
   font-weight: 700;
 }
 .trackRow text {
-  font-size: 21px;
+  font-size: 30px;
   letter-spacing: 1;
   fill:#1D1D1B;
   font-family: 'Nunito Sans','Proxima Nova',sans-serif;
@@ -60,9 +60,13 @@ html,body {
   margin:auto;
 }
 .trackTitleRow text{
-  font-size: 26px;
+  font-size: 34px;
   letter-spacing: 1;
   fill:#1D1D1B;
   font-family: 'Nunito Sans','Proxima Nova',sans-serif;
   font-weight: 700;
+}
+.trackName {
+  width: 400px;
+  overflow: hidden;
 }
